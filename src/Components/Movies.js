@@ -37,7 +37,7 @@ class Movies extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-12 header text-center">
-                        <h2 className="display-2">Scene It</h2>
+                        <h2 className="display-2">Movie App</h2>
                         <p>Search for movies you want to watch.</p>
                         <p>Save them to your list</p>
                     </div>

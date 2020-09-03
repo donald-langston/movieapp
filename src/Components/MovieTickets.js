@@ -5,51 +5,77 @@ import MovieSeats from './MovieSeats';
 class MovieTickets extends Component {
     state = {
         occupied: false,
-        moviePrice: 0,
-        totalSeats: 0
-    }
-
-    totalPrice = () => {
-        return this.state.totalSeats * this.state.moviePrice;
+        moviePrice: 15,
+        totalPrice: 0,
+        totalSeats: 0,
+        adultSeats: 0,
+        childSeats: 0,
+        chosenSeats: []
     }
 
     selectMovie = (e) => {
-        console.log(e.target.value)
         this.setState({
-            moviePrice: e.target.value
+            moviePrice: parseInt(e.target.value)
         })
     }
 
     selectSeat = (e) => {
+        // this runs if seat is deselected
         if(e.target.className.indexOf("occupied") !== -1) {
             e.target.className = "seat";
-            this.setState({
-                occupied: false,
-                totalSeats: this.state.totalSeats - 1
+            const pickedSeat = this.state.chosenSeats.find((seat) => {
+                return seat.seat === e.target.id;
             });
+            if(pickedSeat.type === "child") {
+                this.setState({
+                    childSeats: this.state.childSeats - 1,
+                    occupied: false,
+                    totalSeats: this.state.totalSeats - 1,
+                    chosenSeats: this.state.chosenSeats.filter((seat) => {
+                        return seat.seat !== e.target.id;
+                    })
+                })
+            } else if(pickedSeat.type === "adult") {
+                this.setState({
+                    adultSeats: this.state.adultSeats - 1,
+                    occupied: false,
+                    totalSeats: this.state.totalSeats - 1,
+                    chosenSeats: this.state.chosenSeats.filter((seat) => {
+                        return seat.seat !== e.target.id;
+                    })
+                })
+            }
+            // this runs if seat is selected
         } else {
             e.target.className += ' occupied';
-            this.setState({
-                occupied: true,
-                totalSeats: this.state.totalSeats + 1
-            });
+            if(this.state.moviePrice === 15) {
+                this.setState({
+                    occupied: true,
+                    adultSeats: this.state.adultSeats + 1,
+                    totalSeats: this.state.totalSeats + 1,
+                    totalPrice: this.state.totalPrice + this.state.moviePrice,
+                    chosenSeats: this.state.chosenSeats.concat({seat: e.target.id, type: "adult"})
+                });
+            } else if(this.state.moviePrice === 10) {
+                this.setState({
+                    occupied: true,
+                    childSeats: this.state.childSeats + 1,
+                    totalSeats: this.state.totalSeats + 1,
+                    totalPrice: this.state.totalPrice + this.state.moviePrice,
+                    chosenSeats: this.state.chosenSeats.concat({seat: e.target.id, type: "child"})
+                });
+            }
         }
-        
     }
+
     render() {
-        console.log(this.state.occupied);
-        console.log(this.state.moviePrice);
-        console.log(this.state.totalSeats);
-        console.log(this.totalPrice());
         return (
-            <div>
+            <div className="movieapp-container">
                 <div className="movie-container">
                 <label>Pick a movie:</label>
-                <select id="movie" onChange={this.selectMovie}>
-                    <option value="10">Avengers: Endgame($10)</option>
-                    <option value="12">Joker ($12)</option>
-                    <option value="8">Toy Story 4 ($8)</option>
-                    <option value="9">The Lion King ($9)</option>
+                <select id="movie" value={this.state.moviePrice} onChange={this.selectMovie}>
+                    <option value="15">{this.props.location.state.currentMovie.Title} (Adult $15)</option>
+                    <option value="10">{this.props.location.state.currentMovie.Title} (Child $10)</option>
                 </select>
                 </div>
 
@@ -70,20 +96,19 @@ class MovieTickets extends Component {
 
                 <div className="container">
                     <div className="screen"></div>
-                        <MovieSeats selectSeat={this.selectSeat} />
-                        <MovieSeats selectSeat={this.selectSeat} />
-                        <MovieSeats selectSeat={this.selectSeat} />
-                        <MovieSeats selectSeat={this.selectSeat} />
-                        <MovieSeats selectSeat={this.selectSeat} />
-                        <MovieSeats selectSeat={this.selectSeat} />
-                        <MovieSeats selectSeat={this.selectSeat} />
-                        <MovieSeats selectSeat={this.selectSeat} />
+                        <MovieSeats seat={1} selectSeat={this.selectSeat} />
+                        <MovieSeats seat={9} selectSeat={this.selectSeat} />
+                        <MovieSeats seat={17} selectSeat={this.selectSeat} />
+                        <MovieSeats seat={25} selectSeat={this.selectSeat} />
+                        <MovieSeats seat={33} selectSeat={this.selectSeat} />
+                        <MovieSeats seat={41} selectSeat={this.selectSeat} />
+                        <MovieSeats seat={49} selectSeat={this.selectSeat} />
+                        <MovieSeats seat={57} selectSeat={this.selectSeat} />
                 </div>
 
-                <p className="text">You have selected <span id="count">{this.state.totalSeats}</span> seats for a price of $<span id="total">{this.totalPrice()}</span></p>
+                <p className="text">You have selected <span id="count">{this.state.totalSeats}</span> seats for a price of $<span id="total">{this.state.totalPrice}</span></p>
             </div>
         )
-        
     }
 }
 

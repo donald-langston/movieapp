@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Movies.css';
 
 class Movie extends Component {
     state = {
         moviesArray: []
+    }
+
+    selectedMovie = (e) => {
+        console.log(e.target);
     }
 
     saveToWatchlist = (movie) => {
@@ -39,7 +44,8 @@ class Movie extends Component {
                     <div className="card-body">
                         <h5 className="card-title">{currentMovie.Title}</h5>
                         <p className="card-text">{currentMovie.Year}</p>
-                        <a href="#" className="btn btn-primary" onClick={() => {this.saveToWatchlist(currentMovie)}}>Add</a>
+                        <a href="#" className="btn btn-primary" onClick={() => {this.saveToWatchlist(currentMovie)}}>Add to Watchlist</a>
+                        <Link className="btn btn-primary" to={{pathname: "/movietickets", state: {currentMovie}}}>Purchase Ticket</Link>
                     </div>
                 </div>
             )
