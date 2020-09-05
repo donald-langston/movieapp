@@ -31,6 +31,7 @@ class MovieTickets extends Component {
                     childSeats: this.state.childSeats - 1,
                     occupied: false,
                     totalSeats: this.state.totalSeats - 1,
+                    totalPrice: this.state.totalPrice - 10,
                     chosenSeats: this.state.chosenSeats.filter((seat) => {
                         return seat.seat !== e.target.id;
                     })
@@ -40,6 +41,7 @@ class MovieTickets extends Component {
                     adultSeats: this.state.adultSeats - 1,
                     occupied: false,
                     totalSeats: this.state.totalSeats - 1,
+                    totalPrice: this.state.totalPrice - 15,
                     chosenSeats: this.state.chosenSeats.filter((seat) => {
                         return seat.seat !== e.target.id;
                     })
@@ -70,7 +72,7 @@ class MovieTickets extends Component {
 
     render() {
         return (
-            <div className="movieapp-container">
+            <div className="movieticket-container">
                 <div className="movie-container">
                 <label>Pick a movie:</label>
                 <select id="movie" value={this.state.moviePrice} onChange={this.selectMovie}>

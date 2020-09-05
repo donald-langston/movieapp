@@ -54,9 +54,10 @@ class Movie extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="movies-container">
                 {this.renderMovies()}
             </div>
+                
         )
     }
 }

@@ -34,12 +34,13 @@ class Movies extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="movieapp-container">
                 <div className="row">
                     <div className="col-12 header text-center">
                         <h2 className="display-2">Movie App</h2>
                         <p>Search for movies you want to watch.</p>
-                        <p>Save them to your list</p>
+                        <p>Save them to your watchlist.</p>
+                        <p>Click Purchase Tickets button if you would like to see in movies.</p>
                     </div>
                 </div>
                 <div className="row">
@@ -55,7 +56,6 @@ class Movies extends Component {
                 <div className="row">
                     <div className="col-12 results">
                         <Link to="/watchlist">Go to my watchlist</Link>
-                        <div className="movies-container">
                             <Movie movies={this.state.movies} />
                             {/*<div className="movie card" style={{width: "18rem"}}>
                                 <img src="..." className="card-img-top" alt="..." />
@@ -81,7 +81,6 @@ class Movies extends Component {
                                 <a href="/" className="btn btn-primary">Add</a>
                                 </div>
                             </div>*/}
-                        </div>
                     </div>
                 </div>
             </div>
