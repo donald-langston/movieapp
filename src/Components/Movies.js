@@ -18,7 +18,7 @@ class Movies extends Component {
         e.preventDefault();
         var searchString = this.state.movieTitle;
         var urlEncodedSearchString = encodeURIComponent(searchString);
-        axios.get("http://www.omdbapi.com/?apikey=d5b538&s=" + urlEncodedSearchString).then((response) => {
+        axios.get("https://www.omdbapi.com/?apikey=d5b538&s=" + urlEncodedSearchString).then((response) => {
             this.setState({
                 movies: response.data.Search
             })
