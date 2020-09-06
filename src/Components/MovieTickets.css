@@ -97,9 +97,10 @@
 
 .screen {
     background-color: #fff;
-    height: 70px;
-    width: 100%;
-    margin: 15px 0;
+    height: 100px;
+    width: 50%;
+    /* margin-left: 20vw; */
+    margin: 15px 0 15px 25vw;
     transform: rotateX(-45deg);
     box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
 }

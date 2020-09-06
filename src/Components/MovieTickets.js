@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './MovieTickets.css';
 import MovieSeats from './MovieSeats';
 
@@ -73,8 +74,9 @@ class MovieTickets extends Component {
     render() {
         return (
             <div className="movieticket-container">
+            <Link to="/">Home</Link>
                 <div className="movie-container">
-                <label>Pick a movie:</label>
+                <label>Pick a ticket(Child or Adult):</label>
                 <select id="movie" value={this.state.moviePrice} onChange={this.selectMovie}>
                     <option value="15">{this.props.location.state.currentMovie.Title} (Adult $15)</option>
                     <option value="10">{this.props.location.state.currentMovie.Title} (Child $10)</option>

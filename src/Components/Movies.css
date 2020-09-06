@@ -1,6 +1,7 @@
 .movieapp-container {
 	background-color: #242333;
 	height: 100vh;
+	overflow-x: hidden;
 }
 
 .header {
@@ -26,4 +27,3 @@
 .movie {
 	margin-bottom: 15px;
 }
-
